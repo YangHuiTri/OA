@@ -37,7 +37,9 @@
                 <td class="process"><if condition='$vol.pid == 0'>顶级部门<else/>{$vol.deptname}</if></td>
                 <td class="node">{$vol.sort}</td>
                 <td class="time">{$vol.remark}</td>
-                <td class="operate"><a href="__CONTROLLER__/edit/id/{$vol.id}">编辑</a></td>
+                <td class="operate">
+                    <input type="checkbox" class="deptid" value="{$vol.id}" />
+                    <a href="__CONTROLLER__/edit/id/{$vol.id}">编辑</a></td>
             </tr>
             </volist>
         </tbody>
@@ -71,5 +73,27 @@ $('.pagination').pagination(100,{
 $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
 
 showRemind('input[type=text], textarea','placeholder');
+
+//jQuery代码
+$(function(){
+    //给删除按钮绑定点击事件
+    $('.del').on('click',function(){
+        //事件处理程序
+        var idObj = $(':checkbox:checked'); //获取全部已经被选中的checkbox
+        var id = '';    //接收处理后的部门id值，组成id1,id2,id3...
+        //循环遍历idObj对象，获取其中的每一个值
+        for (var i = 0; i < idObj.length; i++) {
+            id += idObj[i].value + ',';
+        }
+        //去掉最后逗号
+        id = id.substring(0,id.length - 1);
+        //判断id
+        if(id == ''){
+            return false;
+        }
+        //带着参数跳转到del方法
+        window.location.href = '__CONTROLLER__/del/id/' + id;
+    });
+});
 </script>
 </html>

@@ -113,6 +113,24 @@ class DeptController extends Controller{
 		}
 	}
 
+	//删除部门
+	public function del(){
+		//接收id
+		$id = I('get.deptid');
+		//实例化模型
+		$model = M('Dept');
+		//删除
+		$result = $model -> delete($id);
+		//判断结果
+		if($result){
+			//删除成功
+			$this->success('删除成功!');
+		}else{
+			//删除失败
+			$this -> error('删除失败！');
+		}
+	}
+
 
 
 }

@@ -36,7 +36,9 @@
                 <td class="process"><?php if($vol["pid"] == 0): ?>顶级部门<?php else: echo ($vol["deptname"]); endif; ?></td>
                 <td class="node"><?php echo ($vol["sort"]); ?></td>
                 <td class="time"><?php echo ($vol["remark"]); ?></td>
-                <td class="operate"><a href="/index.php/Admin/Dept/edit/id/<?php echo ($vol["id"]); ?>">编辑</a></td>
+                <td class="operate">
+                    <input type="checkbox" class="deptid" value="<?php echo ($vol["id"]); ?>" />
+                    <a href="/index.php/Admin/Dept/edit/id/<?php echo ($vol["id"]); ?>">编辑</a></td>
             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </tbody>
     </table>
@@ -69,5 +71,27 @@ $('.pagination').pagination(100,{
 $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
 
 showRemind('input[type=text], textarea','placeholder');
+
+//jQuery代码
+$(function(){
+    //给删除按钮绑定点击事件
+    $('.del').on('click',function(){
+        //事件处理程序
+        var idObj = $(':checkbox:checked'); //获取全部已经被选中的checkbox
+        var id = '';    //接收处理后的部门id值，组成id1,id2,id3...
+        //循环遍历idObj对象，获取其中的每一个值
+        for (var i = 0; i < idObj.length; i++) {
+            id += idObj[i].value + ',';
+        }
+        //去掉最后逗号
+        id = id.substring(0,id.length - 1);
+        //判断id
+        if(id == ''){
+            return false;
+        }
+        //带着参数跳转到del方法
+        window.location.href = '/index.php/Admin/Dept/del/id/' + id;
+    });
+});
 </script>
 </html>
