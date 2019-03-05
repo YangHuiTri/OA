@@ -63,4 +63,26 @@ class UserController extends Controller{
 		}
 	}
 
+	//统计图表
+	public function charts(){
+		//select t2.name as deptname,count(*) as count from sp_user as t1,sp_dept as t2 where t1.dept_id = t2.id group by deptname;
+		$model = M();
+		//连贯操作
+		$data = $model -> field('t2.name as deptname,count(*) as count') -> table('sp_user as t1,sp_dept as t2') -> where('t1.dept_id = t2.id') -> group('deptname') -> select();
+		$str = '[';
+		//循环遍历字符串
+		foreach ($data as $key => $value) {
+			$str .= "['" . $value['deptname'] . "'," . $value['count'] . "],";
+		}
+		//去除最后的逗号
+		$str = rtrim($str,',') . ']';
+		//[['总裁办',1],['程序部',2],['管理部',2],['财务部',1],['运营部',1]]
+		//传递给模版
+		$this -> assign('str',$str);
+		//展示模版
+		$this -> display();
+	}
+
+
+
 }
