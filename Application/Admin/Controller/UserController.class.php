@@ -8,11 +8,27 @@ class UserController extends Controller{
 
 	//职员列表
 	public function showList(){
-		//查询数据
-		$data = M('User') -> select();
-		//变量分配
-		$this -> assign('data', $data);
-		//展示模板
+		//模型实例化
+		$model = M('User');
+		//分页第一步：查询总的记录数
+		$count = $model -> count();
+		//分页第二步：实例化分页类，传递参数
+		$page = new \Think\Page($count,1);	//每页显示1个
+		//分页第三步：可选步骤，定义提示文字
+		$page -> rollPage = 5;
+		$page -> lastSuffix = false;
+		$page -> setConfig('prev','上一页');
+		$page -> setConfig('next','下一页');
+		$page -> setConfig('last','末页');
+		$page -> setConfig('first','首页');
+		//分页第四步：使用show方法生成url
+		$show = $page -> show();
+		//分页第五步：展示数据
+		$data = $model -> limit($page -> firstRow,$page -> listRows) -> select();
+		//分页第六步：传递给模版
+		$this -> assign('data',$data);
+		$this -> assign('show',$show);
+		//分页第七步：展示模版
 		$this -> display();
 	}
 
