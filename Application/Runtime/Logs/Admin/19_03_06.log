@@ -1,0 +1,15 @@
+[ 2019-03-06T10:06:32+08:00 ] 127.0.0.1 /index.php/Admin/Doc/showList.html
+ERR: 非法操作:showList
+
+[ 2019-03-06T10:17:43+08:00 ] 127.0.0.1 /index.php/Admin/Doc/showList.html
+ERR: 非法操作:showList
+
+[ 2019-03-06T10:18:35+08:00 ] 127.0.0.1 /index.php/Admin/Doc/showList.html
+ERR: 非法操作:showList
+
+[ 2019-03-06T10:19:23+08:00 ] 127.0.0.1 /index.php/Admin/Doc/showList.html
+ERR: 非法操作:showList
+
+[ 2019-03-06T11:55:56+08:00 ] 127.0.0.1 /index.php/Admin/Doc/add
+ERR: syntax error, unexpected ';', expecting ')'
+
