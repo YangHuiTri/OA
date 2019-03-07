@@ -2,11 +2,11 @@
 
 PHP语言开发，使用ThinkPHP框架（v3.2.3）
 
-![login](.\Public\Screenshot\login.png)
+![login](./Public/Screenshot/login.png)
 
 
 
-![](.\Public\Screenshot\index.png)
+![](./Public/Screenshot/index.png)
 
 ﻿## 简介
 

@@ -41,6 +41,32 @@ class DocController extends Controller{
 		$this -> display();
 	}
 
+	//附件下载
+	public function download(){
+		//接收id
+		$id = I('get.id');
+		//查询数据
+		$data = M('Doc') -> find($id);
+		//下载代码
+		$file = WORKING_PATH . $data['filepath'];
+		//输出文件
+		header("Content-type: application/octet-stream");
+		header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+		header("Content-Length: ". filesize($file));
+		//输出缓冲区
+		readfile($file);
+	}
+
+	//showContent
+	public function showContent(){
+		//接收id
+		$id = I('get.id');
+		//查询数据
+		$data = M('Doc') -> find($id);
+		//输出内容，并且还原被转移的字符
+		echo htmlspecialchars_decode($data['content']);
+	}
+
 
 
 }
