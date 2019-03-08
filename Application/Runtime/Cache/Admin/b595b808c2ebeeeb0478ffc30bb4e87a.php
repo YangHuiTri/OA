@@ -47,6 +47,10 @@
           </li>
           <li class="konwledge">
             <div class="nav-header"><a href="javascript:;" class="ue-clear"><span>知识管理</span><i class="icon"></i></a></div>
+            <ul class="subnav">
+              <li><a href="javascript:;" date-src="<?php echo U('Knowledge/showList');?>">知识列表</a></li>
+              <li><a href="javascript:;" date-src="<?php echo U('Knowledge/add');?>">添加知识</a></li>
+            </ul>
           </li>
           <li class="agency">
             <div class="nav-header"><a href="javascript:;" class="ue-clear"><span>组织结构</span><i class="icon"></i></a></div>

@@ -67,6 +67,36 @@ class DocController extends Controller{
 		echo htmlspecialchars_decode($data['content']);
 	}
 
+	//公文编辑
+	public function edit(){
+		//判断请求类型
+		if(IS_POST){
+			//处理数据的提交
+			$post = I('post.');
+			//实例化模型
+			$model = D('Doc');
+			//调用updateData方法实现数据的保存
+			$result = $model -> updateData($post,$_FILES['file']);
+			//判断返回值
+			if($result){
+				//成功
+				$this -> success('修改成功！',U('showList'),3);
+			}else{
+				//失败
+				$this -> error('保存失败！');
+			}
+		}else{
+			//接收公文id
+			$id = I('get.id');
+			//查询数据
+			$data = M('Doc')->find($id);
+			//变量分配
+			$this -> assign('data',$data);
+			//展示模板
+			$this -> display();
+		}
+	}
+
 
 
 }

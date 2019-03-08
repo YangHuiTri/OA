@@ -21,12 +21,11 @@
 </head>
 
 <body>
-<div class="title"><h2>公文管理</h2></div>
+<div class="title"><h2>知识管理</h2></div>
 <div class="table-operate ue-clear">
-	<a href="/index.php/Admin/Doc/add" class="add">添加</a>
+	<a href="/index.php/Admin/Knowledge/add" class="add">添加</a>
     <a href="javascript:;" class="del">删除</a>
     <a href="javascript:;" class="edit">编辑</a>
-    <a href="javascript:;" class="count">统计</a>
     <a href="javascript:;" class="check">审核</a>
 </div>
 <div class="table-box">
@@ -35,24 +34,25 @@
         	<tr>
             	<th class="id">序号</th>
                 <th class="name">标题</th>
-				<th class="file">附件</th>
+				<th class="file">缩略图</th>
+                <th class="content">内容</th>
                 <th class="content">作者</th>
 				<th class="addtime">添加时间</th>
                 <th class="operate">操作</th>
             </tr>
         </thead>
         <tbody>
-        	<?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vol): $mod = ($i % 2 );++$i;?><tr>
-	            	<td class="id"><?php echo ($vol["id"]); ?></td>
-	                <td class="name"><?php echo (msubstr($vol["title"],0,8)); ?></td>
-					<td class="file"><?php echo ($vol["filename"]); if(!empty($vol["filename"])): ?>【<a href="/index.php/Admin/Doc/download/id/<?php echo ($vol["id"]); ?>">下载</a>】<?php endif; ?></td>
-	                <td class="content"><?php echo ($vol["author"]); ?></td>
-	                <td class="addtime"><?php echo (date('Y-m-d H:i:s',$vol["addtime"])); ?></td>
-	                <td class="operate">
-	                	<a href ='javascript:;' class="show" data="<?php echo ($vol["id"]); ?>" data-title="<?php echo ($vol["title"]); ?>">查看</a> |
-	                	<a href='/index.php/Admin/Doc/edit/id/<?php echo ($vol["id"]); ?>'>编辑</a> 
-	                </td>
-	            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+        	<?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
+            	<td class="id"><?php echo ($vo["id"]); ?></td>
+                <td class="name"><?php echo ($vo["title"]); ?></td>
+				<td class="file"><img src="<?php echo ($vo["thumb"]); ?>"><notenpty name="<?php echo ($vo["picture"]); ?>">【<a href="/index.php/Admin/Knowledge/download/id/<?php echo ($vo["id"]); ?>">下载</a>】</notenpty></td>
+                <td class="content"><?php echo (msubstr($vo["content"],0,20)); ?></td>
+                <td class="content"><?php echo ($vo["author"]); ?></td>
+                <td class="addtime"><?php echo (date('Y-m-d H:i:s',$vo["addtime"])); ?></td>
+                <td class="operate">
+                	<a href ='javascript:;'>查看</a> 
+                </td>
+            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </tbody>
     </table>
 </div>
@@ -66,7 +66,6 @@
 <script type="text/javascript" src="/Public/Admin/js/jquery.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/WdatePicker.js"></script>
-<script type="text/javascript" src="/Public/Admin/plugin/layer/layer.js"></script>
 <script type="text/javascript">
 $(".select-title").on("click",function(){
 	$(".select-list").hide();
@@ -81,24 +80,5 @@ $(".select-list").on("click","li",function(){
 $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
 
 showRemind('input[type=text], textarea','placeholder');
-
-//jquery代码
-$(function(){
-	//给查看按钮绑定点击事件
-	$('.show').on('click',function(){
-		//获取id
-		var id = $(this).attr('data');
-		//获取公文标题
-        var title = $(this).attr('data-title');
-        layer.open({
-            type: 2,
-            title: title,
-            shadeClose: true,
-            shade: 0,   //背景透明
-            area: ['560px', '90%'],
-            content: '/index.php/Admin/Doc/showContent/id/' + id //iframe的url
-        });
-	});
-});
 </script>
 </html>

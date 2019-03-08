@@ -39,4 +39,29 @@ class DocModel extends Model{
 		//添加操作
 		return $this -> add($post);
 	}
+
+	//updateData更新数据保存
+	public function updateData($post,$file){
+		//如果有文件则处理文件
+		if($file['error'] == '0'){
+			//有文件
+			//配置数组
+			$cfg = array('rootPath' => WORKING_PATH.UPLOAD_ROOT_PATH);
+			//实例化上传类
+			$upload = new \Think\Upload($cfg);
+			//上传
+			$info = $upload -> uploadOne($file);
+			//判断上传结果
+			if($info){
+				//成功
+				$post['filepath'] = UPLOAD_ROOT_PATH.$info['savepath'].$info['savename'];
+				$post['filename'] = $info['name'];
+				$post['hasfile'] = 1;
+			}
+		}
+		//写入数据
+		return $this -> save($post);
+	}
+
+
 }
