@@ -4,7 +4,7 @@ namespace Admin\Controller;
 //引入父类
 use Think\Controller;
 //声明继承父类
-class UserController extends Controller{
+class UserController extends CommonController{
 
 	//职员列表
 	public function showList(){

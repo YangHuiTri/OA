@@ -4,7 +4,7 @@ namespace Admin\Controller;
 //引入父类
 use Think\Controller;
 //声明并继承父类
-class KnowledgeController extends Controller{
+class KnowledgeController extends CommonController{
 
 	//添加知识
 	public function add(){

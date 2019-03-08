@@ -4,7 +4,7 @@ namespace Admin\Controller;
 //引入父类
 use Think\Controller;
 //声明并继承父类
-class EmailController extends Controller{
+class EmailController extends CommonController{
 
 	//发邮件
 	public function send(){
@@ -57,6 +57,12 @@ class EmailController extends Controller{
 		header('Content-Disposition: attachment; filename="' . basename($file) . '"');
 		header("Content-Length: ". filesize($file));
 		readfile($file);
+	}
+
+	//空操作方法
+	public function _empty(){
+		//输出
+		$this -> display('Empty/error');
 	}
 
 

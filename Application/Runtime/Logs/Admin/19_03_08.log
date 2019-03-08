@@ -34,3 +34,6 @@ ERR: 非法操作:sendBox
 [ 2019-03-08T15:33:11+08:00 ] 127.0.0.1 /index.php/Admin/Email/sendBox.html
 ERR: 模板不存在:./Application/Admin/View/Email/sendBox.html
 
+[ 2019-03-08T16:51:59+08:00 ] 127.0.0.1 /index.php/Admin/Index/index.html
+ERR: syntax error, unexpected 'l' (T_STRING)
+
