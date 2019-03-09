@@ -18,4 +18,20 @@ return array(
 
     //显示跟踪信息
     'SHOW_PAGE_TRACE'	=>	true,//默认为false
+
+    //RBAC权限数据信息
+    //角色数组
+    'RBAC_ROLES'    =>      array(
+                        1   =>  '高层管理',
+                        2   =>  '中层领带',
+                        3   =>  '普通职员'
+                    ),
+    //权限数组（关联角色数组）
+    'RBAC_ROLE_AUTHS'   =>      array(
+                            1   =>  '*/*',//拥有全部权限
+                            2   =>  array('index/*','email/*', 'doc/*', 'knowledge/*'),
+                            3   =>  array('index/*','email/*', 'knowledge/*')
+                        ),
+
+
 );

@@ -16,7 +16,7 @@
       <h1 class="logo"></h1>
       <div class="login-info ue-clear">
         <div class="welcome ue-clear"><span>欢迎您,</span><a href="javascript:;" class="user-name"><?php echo (session('username')); ?></a></div>
-        <div class="login-msg ue-clear"> <a href="javascript:;" class="msg-txt">消息</a> <a href="javascript:;" class="msg-num">10</a> </div>
+        <div class="login-msg ue-clear"> <a href="<?php echo U('Email/recBox');?>" target="iframe" class="msg-txt">消息</a> <a href="<?php echo U('Email/recBox');?>" target="iframe" class="msg-num">0</a> </div>
       </div>
       <div class="toolbar ue-clear"> <a href="javascript:;" class="home-btn">首页</a> <a href="javascript:;" class="quit-btn exit"></a> </div>
     </div>
@@ -77,7 +77,7 @@
           http://1006.com/index.php/Admin/Index/index
           http://1006.com/index.php/Admin/Index/home
         -->
-        <iframe src="<?php echo U('home');?>" id="iframe" width="100%" height="100%" frameborder="0"></iframe>
+        <iframe name="iframe" src="<?php echo U('home');?>" id="iframe" width="100%" height="100%" frameborder="0"></iframe>
       </div>
     </div>
   </div>
@@ -105,4 +105,20 @@
 <script type="text/javascript" src="/Public/Admin/js/core.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/jquery.dialog.js"></script>
 <script type="text/javascript" src="/Public/Admin/js/index.js"></script>
+<script type="text/javascript">
+  //ajax请求方法
+  function getMsgCount(){
+    //发送ajax请求
+    $.get("<?php echo U('Email/getCount');?>",function(data){
+      //相应的处理代码
+      $('.msg-num').html(data);
+    });
+  }
+
+  //jquery代码
+  $(function(){
+    //定时器
+    setInterval('getMsgCount()', 3000);
+  });
+</script>
 </html>
